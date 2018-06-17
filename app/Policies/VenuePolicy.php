@@ -35,7 +35,7 @@ class VenuePolicy
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::VIEW_OWN_VENUE, 'api') && $venue->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::VIEW_VENUE, 'api') && $venue->belongsToUser($user)) {
             return true;
         }
 
@@ -50,7 +50,7 @@ class VenuePolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo(Permissions::CREATE_VENUES, 'api');
+        return $user->hasPermissionTo(Permissions::CREATE_VENUE, 'api');
     }
 
     /**
@@ -66,7 +66,7 @@ class VenuePolicy
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::EDIT_OWN_VENUE, 'api') && $venue->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::EDIT_VENUE, 'api') && $venue->belongsToUser($user)) {
             return true;
         }
 
@@ -86,7 +86,7 @@ class VenuePolicy
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::DELETE_OWN_VENUE, 'api') && $venue->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::DELETE_VENUE, 'api') && $venue->belongsToUser($user)) {
             return true;
         }
 

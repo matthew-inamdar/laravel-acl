@@ -2,22 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StoreVenueRequest;
+use App\Http\Requests\UpdateVenueRequest;
 use App\Models\Venue;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class VenueController extends Controller
 {
-    /**
-     * VenueController constructor.
-     */
-    public function __construct()
-    {
-        $this->authorizeResource(Venue::class);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -42,16 +35,19 @@ class VenueController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\StoreVenueRequest $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(Request $request)
+    public function store(StoreVenueRequest $request)
     {
+        $this->authorize(Venue::class);
+
         $venue = Venue::create([
             'name' => $request->name,
         ]);
 
-        return response()->json($venue);
+        return response()->json($venue->load('spaces'));
     }
 
     /**
@@ -59,9 +55,12 @@ class VenueController extends Controller
      *
      * @param  \App\Models\Venue $venue
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show(Venue $venue)
     {
+        $this->authorize($venue);
+
         $allowedIncludes = ['spaces', 'spaces.events'];
 
         $venue = QueryBuilder::for(Venue::where('id', $venue->id))
@@ -74,12 +73,15 @@ class VenueController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\UpdateVenueRequest $request
      * @param  \App\Models\Venue $venue
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(Request $request, Venue $venue)
+    public function update(UpdateVenueRequest $request, Venue $venue)
     {
+        $this->authorize($venue);
+
         $venue->update([
             'name' => $request->name,
         ]);
@@ -92,10 +94,13 @@ class VenueController extends Controller
      *
      * @param  \App\Models\Venue $venue
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @throws \Exception
      */
     public function destroy(Venue $venue)
     {
+        $this->authorize($venue);
+
         $venue->delete();
 
         return response()->json(['message' => 'Venue deleted']);

@@ -15,5 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('venues', 'Api\\VenueController');
-    Route::apiResource('events', 'Api\\EventController');
+
+    Route::apiResource('venues.spaces', 'Api\\SpaceController')->only('index', 'store');
+    Route::apiResource('spaces', 'Api\\SpaceController')->except('index', 'store');
 });
