@@ -19,7 +19,7 @@ class VenuePolicy
      */
     public function index(User $user)
     {
-        return $user->hasPermissionTo(Permissions::VIEW_ALL_VENUES, 'api');
+        return $user->hasPermissionTo(Permissions::VIEW_ALL_VENUES);
     }
 
     /**
@@ -31,11 +31,11 @@ class VenuePolicy
      */
     public function view(User $user, Venue $venue)
     {
-        if ($user->hasPermissionTo(Permissions::VIEW_ALL_VENUES, 'api')) {
+        if ($user->hasPermissionTo(Permissions::VIEW_ALL_VENUES)) {
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::VIEW_VENUE, 'api') && $venue->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::VIEW_VENUE) && $venue->belongsToUser($user)) {
             return true;
         }
 
@@ -50,7 +50,7 @@ class VenuePolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo(Permissions::CREATE_VENUE, 'api');
+        return $user->hasPermissionTo(Permissions::CREATE_VENUE);
     }
 
     /**
@@ -62,11 +62,11 @@ class VenuePolicy
      */
     public function update(User $user, Venue $venue)
     {
-        if ($user->hasPermissionTo(Permissions::EDIT_ALL_VENUES, 'api')) {
+        if ($user->hasPermissionTo(Permissions::EDIT_ALL_VENUES)) {
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::EDIT_VENUE, 'api') && $venue->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::EDIT_VENUE) && $venue->belongsToUser($user)) {
             return true;
         }
 
@@ -82,11 +82,11 @@ class VenuePolicy
      */
     public function delete(User $user, Venue $venue)
     {
-        if ($user->hasPermissionTo(Permissions::DELETE_ALL_VENUES, 'api')) {
+        if ($user->hasPermissionTo(Permissions::DELETE_ALL_VENUES)) {
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::DELETE_VENUE, 'api') && $venue->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::DELETE_VENUE) && $venue->belongsToUser($user)) {
             return true;
         }
 

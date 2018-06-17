@@ -21,11 +21,11 @@ class SpacePolicy
      */
     public function index(User $user, Venue $venue)
     {
-        if ($user->hasPermissionTo(Permissions::VIEW_ALL_SPACES, 'api')) {
+        if ($user->hasPermissionTo(Permissions::VIEW_ALL_SPACES)) {
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::VIEW_SPACE, 'api') && $venue->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::VIEW_SPACE) && $venue->belongsToUser($user)) {
             return true;
         }
 
@@ -41,11 +41,11 @@ class SpacePolicy
      */
     public function view(User $user, Space $space)
     {
-        if ($user->hasPermissionTo(Permissions::VIEW_ALL_SPACES, 'api')) {
+        if ($user->hasPermissionTo(Permissions::VIEW_ALL_SPACES)) {
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::VIEW_SPACE, 'api') && $space->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::VIEW_SPACE) && $space->belongsToUser($user)) {
             return true;
         }
 
@@ -61,11 +61,11 @@ class SpacePolicy
      */
     public function create(User $user, Venue $venue)
     {
-        if ($user->hasPermissionTo(Permissions::CREATE_ALL_SPACES, 'api')) {
+        if ($user->hasPermissionTo(Permissions::CREATE_ALL_SPACES)) {
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::CREATE_SPACE, 'api') && $venue->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::CREATE_SPACE) && $venue->belongsToUser($user)) {
             return true;
         }
 
@@ -81,11 +81,11 @@ class SpacePolicy
      */
     public function update(User $user, Space $space)
     {
-        if ($user->hasPermissionTo(Permissions::EDIT_ALL_SPACES, 'api')) {
+        if ($user->hasPermissionTo(Permissions::EDIT_ALL_SPACES)) {
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::EDIT_SPACE, 'api') && $space->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::EDIT_SPACE) && $space->belongsToUser($user)) {
             return true;
         }
 
@@ -101,11 +101,11 @@ class SpacePolicy
      */
     public function delete(User $user, Space $space)
     {
-        if ($user->hasPermissionTo(Permissions::DELETE_ALL_SPACES, 'api')) {
+        if ($user->hasPermissionTo(Permissions::DELETE_ALL_SPACES)) {
             return true;
         }
 
-        if ($user->hasPermissionTo(Permissions::DELETE_SPACE, 'api') && $space->belongsToUser($user)) {
+        if ($user->hasPermissionTo(Permissions::DELETE_SPACE) && $space->belongsToUser($user)) {
             return true;
         }
 
