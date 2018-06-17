@@ -31,4 +31,13 @@ class Event extends Model
     {
         return $this->belongsTo(Space::class);
     }
+
+    /**
+     * @param \App\Models\User $user
+     * @return bool
+     */
+    public function belongsToUser(User $user): bool
+    {
+        return $user->venue_id === $this->space->venue_id;
+    }
 }
