@@ -6,7 +6,6 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\Space;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Carbon;
 use Spatie\QueryBuilder\Filter;
